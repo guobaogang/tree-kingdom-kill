@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    userName: <input type="text" id="user-name">
+
+    <div>
+        <button id="submit">Submit</button>
+    </div>
+
+    <div id="user-list">
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.2/socket.io.js"></script>
+    <script>
+        (function () {
+            //connect to socket io
+            var socket = io();
+
+            //check for connection
+            if (socket !== undefined) {
+                console.log('connected to socket');
+            }
+
+            document.getElementById('submit').addEventListener("click", () => {
+                const userName = document.getElementById('user-name').value;
+                socket.emit('login', userName, (flag) => {
+                    if (flag) {
+                        console.log('登陆成功');
+                    }
+                })
+            })
+
+            socket.on('updateUser', (users) => {
+                console.log(users);
+                const listEl = document.getElementById('user-list');
+                users.forEach(user => {
+                    let divEl = document.createElement('div');
+                    divEl.innerHTML = user;
+                    listEl.appendChild(divEl);
+                })
+            })
+        })()
+    </script>
+</body>
+
+</html>
