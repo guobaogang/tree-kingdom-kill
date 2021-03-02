@@ -40,8 +40,8 @@
             })
 
             socket.on('updateUser', (users) => {
-                console.log(users);
                 const listEl = document.getElementById('user-list');
+                listEl.innerHTML = "";
                 users.forEach(user => {
                     let divEl = document.createElement('div');
                     divEl.innerHTML = user;
