@@ -10,7 +10,7 @@
 
 <body>
     userName: <input type="text" id="user-name">
-
+    roomName: <input type="text" id="room-name">
     <div>
         <button id="submit">Submit</button>
     </div>
@@ -32,7 +32,8 @@
 
             document.getElementById('submit').addEventListener("click", () => {
                 const userName = document.getElementById('user-name').value;
-                socket.emit('login', userName, (flag) => {
+                const roomName = document.getElementById('room-name').value;
+                socket.emit('login', userName, roomName, (flag) => {
                     if (flag) {
                         console.log('登陆成功');
                     }
