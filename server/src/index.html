@@ -40,14 +40,17 @@
                 })
             })
 
-            socket.on('updateUser', (users) => {
-                const listEl = document.getElementById('user-list');
-                listEl.innerHTML = "";
-                users.forEach(user => {
-                    let divEl = document.createElement('div');
-                    divEl.innerHTML = user;
-                    listEl.appendChild(divEl);
-                })
+            socket.on('message', (info) => {
+                if (info.type === 'join') {
+                    const listEl = document.getElementById('user-list');
+                    const {room, user, users} = info.msg;
+                    listEl.innerHTML = user + " 加入房间 " + room +"<br/> 房间人员列表： <br/>";
+                    users.forEach(user => {
+                        let divEl = document.createElement('div');
+                        divEl.innerHTML = user;
+                        listEl.appendChild(divEl);
+                    })
+                }
             })
         })()
     </script>

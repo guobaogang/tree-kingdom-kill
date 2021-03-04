@@ -1,14 +1,13 @@
-class room {
+class Room {
     /**
-     * room构造方法，需要传入roomID，io，创建room 的user默认加入
+     * room构造方法，需要传入roomID，io
      * @param {*} roomId 
      * @param {*} io 
-     * @param {*} user 
      */
-    constructor(roomId, io, user) {
+    constructor(roomId, io) {
         this.roomId = roomId;
         this.io = io;
-        this.users = [user];
+        this.users = [];
     }
 
     /**
@@ -16,7 +15,7 @@ class room {
      * @param {*} msg 消息对象，包含多种类型的消息，比如用户加入离开，用户发送消息等
      */
     sendMsg(msg){
-        this.io.to(this.roomId).emit('msg', msg);
+        this.io.to(this.roomId).emit('message', msg);
     }
 
     /**
@@ -31,8 +30,12 @@ class room {
         this.sendMsg({
             type: 'join',
             msg: {
-                user: user
+                room: roomId,
+                user: user,
+                users: this.users
             }
         })
     }
 }
+
+module.exports = Room;
