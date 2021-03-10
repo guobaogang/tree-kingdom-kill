@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Hall from './components/hall';
 
-const Test = () =>{
-    return <div>test</div>
-};
 
-ReactDOM.render(<Test></Test>, document.getElementById('root'));
+ReactDOM.render(<Hall></Hall>, document.getElementById('root'));

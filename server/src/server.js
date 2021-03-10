@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const httpServer = require("http").createServer(app);
-const io = require("socket.io")(httpServer);
+const io = require("socket.io")(httpServer, { cors: true });
 const Rooms = require('./rooms');
 
 //所有已登录用户
@@ -38,7 +38,7 @@ io.on("connection", socket => {
     //断开socket连接
     socket.on('disconnect', () => {
         console.log(userName + "断开连接");
-        if(!connectedUsers[roomName]) return;
+        if (!connectedUsers[roomName]) return;
         let index = connectedUsers[roomName].indexOf(userName);
         if (index > -1) {
             connectedUsers[roomName].splice(index, 1);
