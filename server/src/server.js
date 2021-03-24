@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const httpServer = require("http").createServer(app);
-const io = require("socket.io")(httpServer, { cors: true });
+const io = require("socket.io")(httpServer, {cors: true});
 const Rooms = require('./rooms');
 
 //所有已登录用户
@@ -18,7 +18,7 @@ io.on("connection", socket => {
     let userName = '';
     let roomName = '';
     //用户登录
-    socket.on('login', (name, room, cb) => {
+    socket.on('Login', (name, cb) => {
         /* userName = name;
         roomName = room;
         socket.join(roomName);
@@ -27,13 +27,24 @@ io.on("connection", socket => {
             connectedUsers[roomName] = [userName];
         cb(true);
         updateUser(); */
-        Rooms.join(room, name, io, socket);
+        //Rooms.join(name, io, socket);
+        userName = name;
+        cb(true);
     });
+
+    socket.on('join', (room) => {
+        Rooms.join(room, userName, io, socket);
+    })
+
+    socket.on('getRooms', (cb)=>{
+        //cb(Rooms.getRoomS())
+        cb(['123','456','789'])
+    })
 
     //广播更新用户列表
     function updateUser() {
         io.to(roomName).emit('updateUser', connectedUsers[roomName]);
-    };
+    }
 
     //断开socket连接
     socket.on('disconnect', () => {

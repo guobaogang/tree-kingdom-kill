@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Hall from './components/hall';
+import RouterPage from './page/RouterPage';
 
 
-ReactDOM.render(<Hall></Hall>, document.getElementById('root'));
+ReactDOM.render(<RouterPage/>, document.getElementById('root'));

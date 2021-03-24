@@ -11,6 +11,9 @@ let Rooms = {
     },
     sendMsg(roomId, msg) {
         roomList[roomId].sendMsg(msg)
+    },
+    getRoomS(){
+        return roomList;
     }
 }
 
