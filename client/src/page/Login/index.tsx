@@ -1,17 +1,30 @@
 import React, {useState} from "react";
-import socket from "../../model/socket";
 import {useHistory} from 'react-router-dom';
+import ajax from '../../api/ajax';
+import {setUserInfo} from "../../utils/util";
 
 function Login() {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     let history = useHistory();
+
     const login = () => {
-        socket.emit('Login', userName, (flag: Boolean) => {
-            if (flag) {
-                history.replace('./home');
+        ajax({
+            url: '/api/login',
+            data: {
+                userName,
+                password
             }
         })
+            .then(res => {
+                setUserInfo({
+                    name: userName
+                })
+                history.replace('./home');
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     return (

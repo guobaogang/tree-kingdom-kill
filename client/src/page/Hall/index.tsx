@@ -1,30 +1,59 @@
 import React, {useEffect, useState} from "react";
-import socket from "../../model/socket";
+import ajax from '../../api/ajax';
+import {useHistory} from "react-router-dom";
 
 function Hall() {
-    const [roomList, setRoomList] = useState([]);
+    const [roomList, setRoomList] = useState({});
+    let history = useHistory();
 
     useEffect(() => {
-        updateRooms();
+        getRooms();
     }, []);
 
-    const updateRooms = () => {
-        console.log("update rooms");
-        socket.emit("getRooms", (rooms: any) => {
-            console.log(rooms)
-            setRoomList(rooms);
+    const getRooms = () => {
+        ajax({
+            url: 'api/getRooms'
+        }).then(res => {
+            // @ts-ignore
+            setRoomList(res.data)
         })
-        socket.on("message", (msg: any) => {
-            console.log(msg);
-        });
     };
+
+    const createRoom = () => {
+        ajax({
+            url: 'api/createRoom',
+            data: {
+                name: new Date().getTime()
+            }
+        }).then(res => {
+            // @ts-ignore
+            history.push('./room/' + res.data.roomId)
+        })
+    };
+
+    const joinRoom = (roomId: any) => {
+        history.push('./room/' + roomId)
+    };
+
+    const renderRooms = () => {
+        return Object.keys(roomList).map(id => {
+            // @ts-ignore
+            const room = roomList[id]
+            return <div key={room.roomName}>
+                <div>房间名称: {room.roomName}</div>
+                <div>房间人数: {room.users.length}</div>
+                <button onClick={() => joinRoom(room.roomId)}>加入房间</button>
+            </div>
+        })
+    }
 
     return (
         <div>
+            <button onClick={createRoom}>创建房间</button>
             房间列表：
-            {roomList.map((room) => {
-                return <div key={room}>{room}</div>;
-            })}
+            {
+                renderRooms()
+            }
         </div>
     );
 }
