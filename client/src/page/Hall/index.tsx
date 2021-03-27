@@ -3,7 +3,7 @@ import ajax from '../../api/ajax';
 import {useHistory} from "react-router-dom";
 
 function Hall() {
-    const [roomList, setRoomList] = useState({});
+    const [roomList, setRoomList] = useState<any>([]);
     let history = useHistory();
 
     useEffect(() => {
@@ -36,10 +36,8 @@ function Hall() {
     };
 
     const renderRooms = () => {
-        return Object.keys(roomList).map(id => {
-            // @ts-ignore
-            const room = roomList[id]
-            return <div key={room.roomName}>
+        return roomList.map((room: any) => {
+            return <div key={room.roomId}>
                 <div>房间名称: {room.roomName}</div>
                 <div>房间人数: {room.users.length}</div>
                 <button onClick={() => joinRoom(room.roomId)}>加入房间</button>

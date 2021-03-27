@@ -13,13 +13,13 @@ let Rooms = {
         roomList[roomId].sendMsg(msg)
     },
     getRoomS() {
-        return roomList.map(room => {
+        return Object.keys(roomList).map(key=>{
             return {
-                roomId: room.roomId,
-                roomName: room.roomName,
-                users: room.users || []
+                roomId: roomList[key].roomId,
+                roomName: roomList[key].roomName,
+                users: roomList[key].users
             }
-        });
+        })
     }
 }
 
