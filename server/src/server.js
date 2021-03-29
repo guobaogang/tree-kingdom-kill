@@ -5,6 +5,7 @@ const httpServer = require("http").createServer(app);
 const io = require("socket.io")(httpServer, {cors: true});
 const Rooms = require('./rooms');
 const bodyParser = require('body-parser');
+const userRouter = require('./router/user');
 
 //所有已登录用户
 let connectedUsers = {};
@@ -15,44 +16,7 @@ app.get('/', (req, res) => {
 
 app.use(bodyParser.json());
 
-app.post('/api/login', (req, res) => {
-    const {userName, password} = req.body.busiParam;
-
-    res.send({
-        success: true
-    })
-});
-
-app.post('/api/getRooms', (req, res) => {
-    const rooms = Rooms.getRoomS();
-    res.send({
-        success: true,
-        data: rooms
-    })
-});
-
-app.post('/api/createRoom', (req, res) => {
-    const {
-        busiParam:
-            {
-                name
-            },
-        sysParam: {
-            user
-        }
-    } = req.body;
-    Rooms.create({
-        roomName: name,
-        roomId: name,
-        createUser: user
-    });
-    res.send({
-        success: true,
-        data: {
-            roomId: name
-        }
-    })
-});
+app.use('/user', userRouter);
 
 //socket连接
 io.on("connection", socket => {

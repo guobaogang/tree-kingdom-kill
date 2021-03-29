@@ -10,7 +10,7 @@ function Login() {
 
     const login = () => {
         ajax({
-            url: '/api/login',
+            url: '/user/login',
             data: {
                 userName,
                 password
