@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import ajax from '../../api/ajax';
 import {useHistory} from "react-router-dom";
+import './index.less';
 
 function Hall() {
     const [roomList, setRoomList] = useState<any>([]);
@@ -37,7 +38,7 @@ function Hall() {
 
     const renderRooms = () => {
         return roomList.map((room: any) => {
-            return <div key={room.roomId}>
+            return <div key={room.roomId} className="room">
                 <div>房间名称: {room.roomName}</div>
                 <div>房间人数: {room.users.length}</div>
                 <button onClick={() => joinRoom(room.roomId)}>加入房间</button>
@@ -46,12 +47,14 @@ function Hall() {
     }
 
     return (
-        <div>
+        <div className="hall">
             <button onClick={createRoom}>创建房间</button>
             房间列表：
-            {
-                renderRooms()
-            }
+            <div className="room-list">
+                {
+                    renderRooms()
+                }
+            </div>
         </div>
     );
 }
