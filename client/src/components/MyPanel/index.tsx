@@ -1,16 +1,15 @@
 import React from "react";
 import Hero from "../Hero";
 import CardPanel from "../CardPanel";
-import Equipment from "../Equipment";
+import './index.less';
 
 function MyPanel(props: any) {
     const {role, hero, cards, status, equipments} = props;
 
     return (
-        <div>
-            <Hero role={role} hero={hero}/>
+        <div className={'panel-container'}>
             <CardPanel cards={cards}/>
-            <Equipment equipments={equipments}/>
+            <Hero role={role} hero={hero}/>
         </div>
     )
 }

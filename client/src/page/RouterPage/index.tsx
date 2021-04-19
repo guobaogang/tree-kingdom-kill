@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Login from "../Login";
 import Hall from "../Hall";
 import Room from "../Room";
+import './index.less';
 
 function RouterPage() {
     return (

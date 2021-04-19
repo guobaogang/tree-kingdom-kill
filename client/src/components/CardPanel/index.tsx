@@ -1,13 +1,14 @@
 import React from "react";
 import Card from "../Card";
+import './index.less';
 
 function CardPanel(props: any) {
     const {cards} = props;
     return (
-        <div>
+        <div className={'card-panel'}>
             {
                 cards.map((card: any) => {
-                    return <Card card={card}/>
+                    return <Card key={card.key} card={card}/>
                 })
             }
         </div>

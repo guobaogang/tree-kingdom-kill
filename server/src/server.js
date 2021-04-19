@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 app.use(bodyParser.json());
 
-app.use('/user', userRouter);
+app.use('/api/user', userRouter);
 
 //socket连接
 io.on("connection", socket => {

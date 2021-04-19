@@ -13,7 +13,7 @@ function Hall() {
 
     const getRooms = () => {
         ajax({
-            url: 'user/getRooms'
+            url: 'api/user/getRooms'
         }).then(res => {
             // @ts-ignore
             setRoomList(res.data)
@@ -22,7 +22,7 @@ function Hall() {
 
     const createRoom = () => {
         ajax({
-            url: 'user/createRoom',
+            url: 'api/user/createRoom',
             data: {
                 name: new Date().getTime()
             }

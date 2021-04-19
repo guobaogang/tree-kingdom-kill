@@ -2,16 +2,25 @@ import React, {useEffect, useState} from "react";
 import socket from "../../model/socket";
 import {getUserInfo} from "../../utils/util";
 import MyPanel from "../../components/MyPanel";
+import {useParams} from 'react-router-dom';
+import './index.less';
 
 function Room(props: any) {
 
     const [players, setPlayers] = useState([]);
+    // @ts-ignore
+    let {id} = useParams();
 
     const playerInfo = {
         role: 1,
         hero: {
             name: '张飞',
-            key: 'zhangfei'
+            key: 'zhangfei',
+            equipments: [{
+                name: '丈八蛇矛',
+                suit: 'spade',
+                distance: 3
+            }]
         },
         cards: [{
             key: 'kill_spade_2',
@@ -38,11 +47,6 @@ function Room(props: any) {
             points: '3',
             suit: 'heart',
             name: '桃'
-        }],
-        equipments: [{
-            name: '丈八蛇矛',
-            suit: 'spade',
-            distance: 3
         }]
     }
 
@@ -52,10 +56,9 @@ function Room(props: any) {
 
     const joinRoom = () => {
         let userInfo = getUserInfo();
-        let roomId = props.match.params.id;
         socket.emit("joinRoom", {
             userName: userInfo && userInfo.name,
-            roomId: roomId
+            roomId: id
         }, (msg: any) => {
             console.log(msg)
         })
@@ -67,15 +70,19 @@ function Room(props: any) {
     }
 
     return (
-        <div>
-            {
-                players.map(player => {
-                    return <div>
-                        {player}
-                    </div>
-                })
-            }
-            <MyPanel {...playerInfo}/>
+        <div className={'game-room'}>
+            <div className={'other-players'}>
+                {
+                    players.map(player => {
+                        return <div key={player}>
+                            {player}
+                        </div>
+                    })
+                }
+            </div>
+            <div className={'my-panel'}>
+                <MyPanel {...playerInfo}/>
+            </div>
         </div>
     );
 }

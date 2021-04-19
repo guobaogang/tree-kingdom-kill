@@ -6,6 +6,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
+        publicPath: '/'
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json'],
@@ -42,9 +43,11 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: false,
+        historyApiFallback: true,
         port: 8080,
+        inline: false,
         proxy: {
-            "/": "http://127.0.0.1:3000"
+            "/api": "http://127.0.0.1:3000"
         }
     }
 }

@@ -1,10 +1,11 @@
 import React from "react";
+import './index.less';
 
-function Card(props: any){
+function Card(props: any) {
     const {card} = props;
 
-    return(
-        <div>
+    return (
+        <div className={'card'}>
             {card.name}
         </div>
     )

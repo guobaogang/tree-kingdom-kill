@@ -6,7 +6,7 @@ function Equipment(props: any) {
     return (
         <div>
             {equipments.map((item: any) => {
-                return <div>{item.name}</div>
+                return <div key={item.name}>{item.name}</div>
             })}
         </div>
     )
