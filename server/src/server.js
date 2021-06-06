@@ -6,16 +6,17 @@ const io = require("socket.io")(httpServer, {cors: true});
 const Rooms = require('./rooms');
 const bodyParser = require('body-parser');
 const userRouter = require('./router/user');
+const router = express.Router();
 
 //所有已登录用户
 let connectedUsers = {};
 
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
-})
+})*/
+
 
 app.use(bodyParser.json());
-
 app.use('/api/user', userRouter);
 
 //socket连接
