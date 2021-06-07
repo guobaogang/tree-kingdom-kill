@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getUserInfo, getToken} from "../utils/util";
+import {getToken} from "../utils/util";
 
 export default function Ajax(
     {
@@ -10,11 +10,9 @@ export default function Ajax(
         headers = {}
     }) {
     return new Promise((resolve, reject) => {
-        let userInfo = getUserInfo();
         let newData = {
             busiParam: data,
             sysParam: {
-                user: userInfo && userInfo.name,
                 ts: new Date().getTime()
             }
         }

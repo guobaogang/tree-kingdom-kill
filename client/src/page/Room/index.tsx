@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import socket from "../../model/socket";
-import {getUserInfo} from "../../utils/util";
 import MyPanel from "../../components/MyPanel";
 import {useParams} from 'react-router-dom';
 import './index.less';
+import {getToken} from "../../utils/util";
 
 function Room(props: any) {
 
@@ -55,9 +55,9 @@ function Room(props: any) {
     }, []);
 
     const joinRoom = () => {
-        let userInfo = getUserInfo();
+
         socket.emit("joinRoom", {
-            userName: userInfo && userInfo.name,
+            token: getToken(),
             roomId: id
         }, (msg: any) => {
             console.log(msg)

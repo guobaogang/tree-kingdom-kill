@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useHistory} from 'react-router-dom';
 import ajax from '../../api/ajax';
-import {setUserInfo, setToken} from "../../utils/util";
+import {setToken} from "../../utils/util";
 
 function Login() {
     const [userName, setUserName] = useState('');
@@ -17,9 +17,6 @@ function Login() {
             }
         })
             .then(res => {
-                setUserInfo({
-                    name: userName
-                })
                 // @ts-ignore
                 setToken(res.token);
                 history.replace('./home');
