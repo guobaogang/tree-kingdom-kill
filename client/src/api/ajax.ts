@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getUserInfo} from "../utils/util";
+import {getUserInfo, getToken} from "../utils/util";
 
 export default function Ajax(
     {
@@ -18,6 +18,9 @@ export default function Ajax(
                 ts: new Date().getTime()
             }
         }
+        let token = getToken();
+        // @ts-ignore
+        headers.authorization = token || '';
         // @ts-ignore
         axios({
             url,

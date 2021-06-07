@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useHistory} from 'react-router-dom';
 import ajax from '../../api/ajax';
-import {setUserInfo} from "../../utils/util";
+import {setUserInfo, setToken} from "../../utils/util";
 
 function Login() {
     const [userName, setUserName] = useState('');
@@ -20,6 +20,8 @@ function Login() {
                 setUserInfo({
                     name: userName
                 })
+                // @ts-ignore
+                setToken(res.token);
                 history.replace('./home');
             })
             .catch(err => {
@@ -27,11 +29,16 @@ function Login() {
             })
     }
 
+    const register = () => {
+        history.replace('./register');
+    }
+
     return (
         <div>
             userName: <input value={userName} onChange={e => setUserName(e.target.value)}/>
             passWord: <input value={password} onChange={e => setPassword(e.target.value)}/>
             <button onClick={login}>Login</button>
+            <button onClick={register}>Register</button>
         </div>
     );
 }

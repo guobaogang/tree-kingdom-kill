@@ -2,16 +2,15 @@ function set(key: string, val: any) {
     if (isObject(val)) {
         val = JSON.stringify(val);
     }
-    sessionStorage.setItem(key, val);
+    localStorage.setItem(key, val);
 }
 
 function get(key: string) {
-    const val = sessionStorage.getItem(key);
-    return val && JSON.parse(val);
+    return localStorage.getItem(key);
 }
 
 function remove(key: string) {
-    sessionStorage.removeItem(key);
+    localStorage.removeItem(key);
 }
 
 function isObject(data: any) {
