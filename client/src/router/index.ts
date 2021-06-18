@@ -7,7 +7,7 @@ export default [
     {
         path: '/',
         name: 'Login',
-        redirect: '/Login',
+        redirect: '/login',
         auth: false,
         component: Login
     }, {

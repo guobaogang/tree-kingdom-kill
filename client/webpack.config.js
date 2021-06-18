@@ -28,9 +28,15 @@ module.exports = {
             {
                 test: /\.less$/,
                 use: [
-                    'style-loader',
-                    'css-loader',
-                    'less-loader'
+                    {loader: 'style-loader'},
+                    {loader: 'css-loader'},
+                    {loader: 'less-loader'},
+                    {
+                        loader: 'style-resources-loader',
+                        options: {
+                            patterns: path.resolve(__dirname, './src/style/main.less')
+                        }
+                    }
                 ]
             }
         ],

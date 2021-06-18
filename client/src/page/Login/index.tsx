@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useHistory} from 'react-router-dom';
 import ajax from '../../api/ajax';
 import {setToken} from "../../utils/util";
+import './index.less';
 
 function Login() {
     const [userName, setUserName] = useState('');
@@ -31,11 +32,19 @@ function Login() {
     }
 
     return (
-        <div>
+        <div className={'login'}>
             userName: <input value={userName} onChange={e => setUserName(e.target.value)}/>
             passWord: <input value={password} onChange={e => setPassword(e.target.value)}/>
             <button onClick={login}>Login</button>
             <button onClick={register}>Register</button>
+            <div>
+                <ul>
+                    <li>1</li>
+                    <li>1</li>
+                    <li>1</li>
+                    <li>1</li>
+                </ul>
+            </div>
         </div>
     );
 }
