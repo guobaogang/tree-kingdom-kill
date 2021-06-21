@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useHistory} from 'react-router-dom';
 import ajax from '../../api/ajax';
 import {setToken} from "../../utils/util";
+import {Button} from "antd";
 import './index.less';
 
 function Login() {
@@ -35,8 +36,8 @@ function Login() {
         <div className={'login'}>
             userName: <input value={userName} onChange={e => setUserName(e.target.value)}/>
             passWord: <input value={password} onChange={e => setPassword(e.target.value)}/>
-            <button onClick={login}>Login</button>
-            <button onClick={register}>Register</button>
+            <Button type={'primary'} onClick={login}>Login</Button>
+            <Button onClick={register}>Register</Button>
             <div>
                 <ul>
                     <li>1</li>
