@@ -1,6 +1,5 @@
 import Login from "../page/Login";
-import Hall from "../page/Hall";
-import Room from "../page/Room";
+import Home from "../page/Home";
 import Register from "../page/Register";
 
 export default [
@@ -23,14 +22,8 @@ export default [
     },
     {
         path: '/home',
-        name: 'Hall',
+        name: 'home',
         auth: true,
-        component: Hall
-    },
-    {
-        path: '/room/:id',
-        name: 'Room',
-        auth: true,
-        component: Room
+        component: Home
     }
 ]
