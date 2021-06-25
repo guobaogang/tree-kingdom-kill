@@ -8,3 +8,7 @@ export function setToken(token: string) {
 export function getToken() {
     return storage.get(TOKEN_KEY);
 }
+
+export function removeToken(){
+    storage.remove(TOKEN_KEY);
+}
