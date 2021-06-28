@@ -1,7 +1,7 @@
 import Login from "../page/Login";
 import Home from "../page/Home";
 import Register from "../page/Register";
-import Shares from "../page/Shares";
+import Stocks from "../page/Stocks";
 import Rules from "../page/Rules";
 import Manage from "../page/Manage";
 
@@ -34,11 +34,11 @@ export default [
         component: Home,
         children: [
             {
-                path: '/home/shares',
-                name: 'Shares',
+                path: '/home/stocks',
+                name: 'Stocks',
                 auth: true,
                 exact: true,
-                component: Shares
+                component: Stocks
             },
             {
                 path: '/home/rules',

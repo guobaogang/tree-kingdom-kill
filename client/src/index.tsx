@@ -1,5 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RouterPage from './page/RouterPage';
+import App from './page/RouterPage';
+import './style/main.less';
+import {Provider} from 'react-redux'
+import store from './redux/store';
 
-ReactDOM.render(<RouterPage/>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}>
+    <App/>
+</Provider>, document.getElementById('root'));
