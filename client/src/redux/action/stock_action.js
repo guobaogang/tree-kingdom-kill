@@ -1,10 +1,11 @@
-export const add = (count) => {
+import {add_stock} from '../constant/redux_type';
+
+export const addStock = (stock) => {
     return (dispatch) => {
         (() => {
-            console.log('123',count)
             dispatch({
-                type : 'addCount',
-                count
+                type: add_stock,
+                stock
             })
         })()
     }
@@ -14,7 +15,7 @@ export const reduce = (count) => {
     return (dispatch) => {
         (() => {
             dispatch({
-                type : 'reduceCount',
+                type: 'reduceCount',
                 count
             })
         })()
